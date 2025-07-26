@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { characterService, Status } from "../services/characterService";
+import { characterService } from "../services/characterService";
 import { CharacterCard } from "./CharacterCard";
-import { Box, Wrap, WrapItem } from "@chakra-ui/react";
+import { Wrap } from "@chakra-ui/react";
 
 export const CharacterGallery = () => {
   const [characters, setCharacters] = useState([]);
