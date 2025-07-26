@@ -11,6 +11,7 @@ import { CharacterStatus } from "../interfaces/ICharacter";
 import { FilterStatus } from "./FilterStatus";
 import { PagingButtons } from "./ui/PagingButtons";
 import { SearchIcon } from "@chakra-ui/icons";
+import { characterStore$ } from "../store/characterStore";
 
 export const CharacterGallery = () => {
   const { loading, characters, pages, filterBy, setFilterBy } =
@@ -54,31 +55,6 @@ export const CharacterGallery = () => {
           }))
         }
       />
-      {/* <RadioGroup
-        defaultValue=""
-        onChange={(nextValue: CharacterStatus) =>
-          setFilterBy((prevFilter) => ({
-            ...prevFilter,
-            page: 1,
-            status: nextValue,
-          }))
-        }
-      >
-        <Stack spacing={5} direction="row">
-          <RadioCard colorScheme="teal" value={""}>
-            All
-          </RadioCard>
-          <RadioCard colorScheme="teal" value={CharacterStatus.Alive}>
-            Alive
-          </RadioCard>
-          <RadioCard colorScheme="teal" value={CharacterStatus.Dead}>
-            Dead
-          </RadioCard>
-          <Radio colorScheme="teal" value={CharacterStatus.Unknown}>
-            Unknown
-          </Radio>
-        </Stack>
-      </RadioGroup> */}
       <PagingButtons
         currentPage={filterBy.page}
         pages={pages}
@@ -98,9 +74,21 @@ export const CharacterGallery = () => {
         }
       />
       <Wrap spacing="10px">
-        {characters.map(({ id, image, name, status }) => (
-          <CharacterCard key={id} image={image} name={name} status={status} />
-        ))}
+        {characters.map((character) => {
+          const { id, image, name, status } = character;
+
+          return (
+            <CharacterCard
+              key={id}
+              image={image}
+              name={name}
+              status={status}
+              onClick={() => {
+                characterStore$.selected.set(character);
+              }}
+            />
+          );
+        })}
       </Wrap>
     </Box>
   );

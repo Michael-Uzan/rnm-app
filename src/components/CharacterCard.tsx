@@ -14,9 +14,15 @@ type CharacterCardProps = {
   name: string;
   status: string;
   image: string;
+  onClick: () => void;
 };
 
-export const CharacterCard = ({ name, status, image }: CharacterCardProps) => {
+export const CharacterCard = ({
+  name,
+  status,
+  image,
+  onClick,
+}: CharacterCardProps) => {
   return (
     <Card
       size={"sm"}
@@ -30,6 +36,7 @@ export const CharacterCard = ({ name, status, image }: CharacterCardProps) => {
         boxShadow: "2xl",
         cursor: "pointer",
       }}
+      onClick={onClick}
     >
       <Image
         objectFit="cover"
