@@ -23,7 +23,7 @@ export const PagingButtons = ({
       <IconButton
         aria-label="left-icon-button"
         size={"xs"}
-        icon={<ArrowLeftIcon />}
+        icon={<ArrowLeftIcon color="teal.500" />}
         disabled={backDisabled}
         onClick={onBackClicked}
       />
@@ -31,7 +31,7 @@ export const PagingButtons = ({
       <IconButton
         aria-label="right-icon-button"
         size={"xs"}
-        icon={<ArrowRightIcon />}
+        icon={<ArrowRightIcon color="teal.500" />}
         disabled={forwardDisabled}
         onClick={onForwardClicked}
       />

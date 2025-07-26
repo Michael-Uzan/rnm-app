@@ -1,9 +1,19 @@
 import { CharacterCard } from "./CharacterCard";
-import { Box, Input, Radio, RadioGroup, Stack, Wrap } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Radio,
+  RadioGroup,
+  Stack,
+  Wrap,
+} from "@chakra-ui/react";
 import { useFetchCharacters } from "../hooks/useFetchCharacters";
 import { CharacterStatus } from "../interfaces/ICharacter";
 import { FilterStatus } from "./FilterStatus";
 import { PagingButtons } from "./ui/PagingButtons";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export const CharacterGallery = () => {
   const { loading, characters, pages, filterBy, setFilterBy } =
@@ -19,13 +29,18 @@ export const CharacterGallery = () => {
 
   return (
     <Box>
-      <Input
-        type="search"
-        placeholder="Type a name..."
-        marginBottom={"10px"}
-        value={filterBy.name}
-        onChange={({ target }) => handleInputChange(target.value)}
-      />
+      <InputGroup>
+        <Input
+          type="search"
+          placeholder="Type a name..."
+          marginBottom={"10px"}
+          value={filterBy.name}
+          onChange={({ target }) => handleInputChange(target.value)}
+        />
+        <InputRightElement>
+          <SearchIcon color="teal.500" />
+        </InputRightElement>
+      </InputGroup>
       <FilterStatus
         name="status"
         options={[
