@@ -1,6 +1,6 @@
 import { HeaderWarper } from "./layout/HeaderWarper";
 import { LogoIcon } from "../assets/LogoIcon";
-import { Heading, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import titleUrl from "../assets/title.svg";
 
 export const AppHeader = () => {

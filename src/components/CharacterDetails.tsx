@@ -12,7 +12,7 @@ export const CharacterDetails = () => {
       title={name}
       image={image}
       labels={isSelected ? ([status, species, gender] as string[]) : undefined}
-      description={`${name}, appears in ${episodes} episodes`}
+      description={`${name}, appears in ${episodes} episodes.`}
       isOpen={isSelected}
       onClose={() => characterStore$.selected.set(null)}
     />
