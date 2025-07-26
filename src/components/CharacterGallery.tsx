@@ -4,9 +4,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Radio,
-  RadioGroup,
-  Stack,
   Wrap,
 } from "@chakra-ui/react";
 import { useFetchCharacters } from "../hooks/useFetchCharacters";
