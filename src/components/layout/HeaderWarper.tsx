@@ -7,7 +7,7 @@ export const HeaderWarper = ({ children }: { children: ReactNode }) => {
       alignItems="center"
       pl="15px"
       w="100%"
-      h="72px"
+      h="80px"
       borderColor="gray.200"
       borderBottomWidth="1px"
     >
