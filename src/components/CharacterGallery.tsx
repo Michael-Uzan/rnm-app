@@ -1,4 +1,4 @@
-import { CharacterCard } from "./CharacterCard";
+import { CharacterCard } from "./ui/CharacterCard";
 import {
   Box,
   Input,

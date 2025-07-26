@@ -3,12 +3,11 @@ import {
   CardBody,
   CardFooter,
   Heading,
-  IconButton,
   Image,
   Stack,
-  Text,
+  Tag,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+import { FavoriteButton } from "./FavoriteButton";
 
 type CharacterCardProps = {
   name: string;
@@ -46,22 +45,14 @@ export const CharacterCard = ({
       />
       <Stack>
         <CardBody width={"140px"}>
-          <Heading maxWidth={"100px"} size="sm">
+          <Heading maxWidth={"100px"} size="sm" marginBottom={"10px"}>
             {name}
           </Heading>
-          <Text py="2">{status}</Text>
+          <Tag colorScheme="teal">{status}</Tag>
         </CardBody>
 
         <CardFooter>
-          <IconButton
-            variant="outline"
-            aria-label="Send email"
-            icon={<StarIcon color={"gray.300"} />}
-            onClick={(e) => {
-              e.stopPropagation();
-              console.log("like");
-            }}
-          />
+          <FavoriteButton isActive onClick={() => console.log("like")} />
         </CardFooter>
       </Stack>
     </Card>
