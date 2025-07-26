@@ -1,4 +1,5 @@
 import { RNM_BASE_URL, Endpoint } from "../config";
+import type { CharacterStatus } from "../interfaces/ICharacter";
 import { httpService } from "./httpService";
 
 export const characterService = {
@@ -6,11 +7,6 @@ export const characterService = {
   getById,
 };
 
-export enum Status {
-  Alive = "Alive",
-  Dead = "Dead",
-  Unknown = "unknown",
-}
 const CHARACTER_BASE_URL = `${RNM_BASE_URL}${Endpoint.Character}`;
 
 function query({
@@ -19,7 +15,7 @@ function query({
   page = 1,
 }: {
   name?: string;
-  status?: Status;
+  status?: CharacterStatus;
   page?: number;
 }) {
   return httpService.get(`${CHARACTER_BASE_URL}`, {

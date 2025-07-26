@@ -1,22 +1,10 @@
-import { useEffect, useState } from "react";
-import { characterService } from "../services/characterService";
 import { CharacterCard } from "./CharacterCard";
 import { Wrap } from "@chakra-ui/react";
+import { useFetchCharacters } from "../hooks/useFetchCharacters";
 
 export const CharacterGallery = () => {
-  const [characters, setCharacters] = useState([]);
+  const { characters } = useFetchCharacters();
 
-  useEffect(() => {
-    const load = async () => {
-      const query = await characterService.query({
-        // name: "rick",
-        // status: Status.Alive,
-      });
-      setCharacters(query.results);
-    };
-
-    load();
-  });
   return (
     <Wrap spacing="10px">
       {characters.map(({ id, image, name, status }) => (
