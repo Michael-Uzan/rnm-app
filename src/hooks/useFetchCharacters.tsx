@@ -3,9 +3,14 @@ import { characterService } from "../services/characterService";
 import type { IInfoApi } from "../interfaces/IInfoApi";
 import type { ICharacterApi } from "../interfaces/ICharacerApi";
 import { parseCharacterData } from "../utils/dataUtils";
-import type { ICharacter } from "../interfaces/ICharacter";
+import type { CharacterStatus, ICharacter } from "../interfaces/ICharacter";
 
 export const useFetchCharacters = () => {
+  const [filterBy, setFilterBy] = useState<{
+    page?: number;
+    name?: string;
+    status?: CharacterStatus;
+  }>({});
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -15,10 +20,10 @@ export const useFetchCharacters = () => {
       try {
         setLoading(true);
         setError(false);
-        const fetchedData = (await characterService.query({
-          // name: "rick",
-          // status: Status.Alive,
-        })) as { info: IInfoApi; results: ICharacterApi[] };
+        const fetchedData = (await characterService.query(filterBy)) as {
+          info: IInfoApi;
+          results: ICharacterApi[];
+        };
         setCharacters(parseCharacterData(fetchedData.results));
       } catch (e) {
         setError(true);
@@ -29,7 +34,7 @@ export const useFetchCharacters = () => {
     };
 
     loadCharacters();
-  }, []);
+  }, [filterBy]);
 
-  return { characters, loading, error };
+  return { characters, loading, error, filterBy, setFilterBy };
 };
