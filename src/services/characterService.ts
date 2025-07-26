@@ -11,15 +11,22 @@ export enum Status {
   Dead = "Dead",
   Unknown = "unknown",
 }
-const CHARACTER_BASE_URL = `${RNM_BASE_URL}/${Endpoint.Character}`;
+const CHARACTER_BASE_URL = `${RNM_BASE_URL}${Endpoint.Character}`;
 
-function query({ name, status }: { name?: string; status?: Status }) {
-  const filterByName = name ? `/?name=${name}` : "";
-  const filterByStatus = status ? `&status=${status}` : "";
-
-  return httpService.get(
-    `${CHARACTER_BASE_URL}${filterByName}${filterByStatus}`
-  );
+function query({
+  name,
+  status,
+  page = 1,
+}: {
+  name?: string;
+  status?: Status;
+  page?: number;
+}) {
+  return httpService.get(`${CHARACTER_BASE_URL}`, {
+    page,
+    name,
+    status,
+  });
 }
 
 function getById(characterIds: number[]) {
