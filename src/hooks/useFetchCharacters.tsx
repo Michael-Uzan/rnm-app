@@ -7,11 +7,12 @@ import type { CharacterStatus, ICharacter } from "../interfaces/ICharacter";
 
 export const useFetchCharacters = () => {
   const [filterBy, setFilterBy] = useState<{
-    page?: number;
+    page: number;
     name?: string;
     status?: CharacterStatus;
-  }>({});
+  }>({ page: 1 });
   const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [pages, setPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -24,6 +25,7 @@ export const useFetchCharacters = () => {
           info: IInfoApi;
           results: ICharacterApi[];
         };
+        setPages(fetchedData.info.pages);
         setCharacters(parseCharacterData(fetchedData.results));
       } catch (e) {
         setError(true);
@@ -36,5 +38,5 @@ export const useFetchCharacters = () => {
     loadCharacters();
   }, [filterBy]);
 
-  return { characters, loading, error, filterBy, setFilterBy };
+  return { characters, pages, loading, error, filterBy, setFilterBy };
 };
