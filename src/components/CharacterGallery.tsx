@@ -1,7 +1,9 @@
 import { CharacterCard } from "./CharacterCard";
-import { Box, Input, Wrap } from "@chakra-ui/react";
+import { Box, Input, Radio, RadioGroup, Stack, Wrap } from "@chakra-ui/react";
 import { useFetchCharacters } from "../hooks/useFetchCharacters";
-import { PagingButtons } from "./PagingButtons";
+import { CharacterStatus } from "../interfaces/ICharacter";
+import { FilterStatus } from "./FilterStatus";
+import { PagingButtons } from "./ui/PagingButtons";
 
 export const CharacterGallery = () => {
   const { loading, characters, pages, filterBy, setFilterBy } =
@@ -24,6 +26,47 @@ export const CharacterGallery = () => {
         value={filterBy.name}
         onChange={({ target }) => handleInputChange(target.value)}
       />
+      <FilterStatus
+        name="status"
+        options={[
+          "",
+          CharacterStatus.Alive,
+          CharacterStatus.Dead,
+          CharacterStatus.Unknown,
+        ]}
+        onChange={(nextValue: string) =>
+          setFilterBy((prevFilter) => ({
+            ...prevFilter,
+            page: 1,
+            status: nextValue as CharacterStatus,
+          }))
+        }
+      />
+      {/* <RadioGroup
+        defaultValue=""
+        onChange={(nextValue: CharacterStatus) =>
+          setFilterBy((prevFilter) => ({
+            ...prevFilter,
+            page: 1,
+            status: nextValue,
+          }))
+        }
+      >
+        <Stack spacing={5} direction="row">
+          <RadioCard colorScheme="teal" value={""}>
+            All
+          </RadioCard>
+          <RadioCard colorScheme="teal" value={CharacterStatus.Alive}>
+            Alive
+          </RadioCard>
+          <RadioCard colorScheme="teal" value={CharacterStatus.Dead}>
+            Dead
+          </RadioCard>
+          <Radio colorScheme="teal" value={CharacterStatus.Unknown}>
+            Unknown
+          </Radio>
+        </Stack>
+      </RadioGroup> */}
       <PagingButtons
         currentPage={filterBy.page}
         pages={pages}
