@@ -1,5 +1,4 @@
 import {
-  Heading,
   HStack,
   Image,
   Modal,

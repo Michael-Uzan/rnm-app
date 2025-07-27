@@ -1,10 +1,11 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { AppFooter } from "./components/AppFooter";
 import { AppHeader } from "./components/AppHeader";
 import { HalfSide, MainContainer } from "./components/layout/MainContainer";
 import { CharacterGallery } from "./components/CharacterGallery";
 import { CharacterDetails } from "./components/CharacterDetails";
 import HeadingSection from "./components/ui/HeadingSection";
+import { FavoriteCharacterGallery } from "./components/FavoriteCharacterGallery";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         </HalfSide>
         <HalfSide>
           <HeadingSection title="Favorites" />
+          <FavoriteCharacterGallery />
         </HalfSide>
       </MainContainer>
       <AppFooter />
