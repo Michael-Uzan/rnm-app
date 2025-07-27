@@ -1,4 +1,4 @@
-import { Box, Wrap } from "@chakra-ui/react";
+import { Box, Text, Wrap } from "@chakra-ui/react";
 import { useFetchCharacters } from "../hooks/useFetchCharacters";
 import { CharacterStatus } from "../interfaces/ICharacter";
 import { FilterStatus } from "./FilterStatus";
@@ -6,10 +6,20 @@ import { PagingButtons } from "./ui/PagingButtons";
 import { CharacterCardWarper } from "./CharacterCardWarper";
 import { CharacterCardSkeleton } from "./ui/CharacterCard";
 import { SearchInputDebounce } from "./ui/SearchInputDebounce";
+import { useToastMessages } from "../hooks/useToastMessages";
+import { useEffect } from "react";
 
 export const CharacterGallery = () => {
-  const { loading, characters, pages, filterBy, setFilterBy } =
+  const { loading, error, characters, pages, filterBy, setFilterBy } =
     useFetchCharacters();
+  const { warnToast } = useToastMessages();
+
+  useEffect(() => {
+    if (error) {
+      warnToast({ description: "Something went wrong" });
+    }
+  }, [error, warnToast]);
+
   const handleInputChange = (name: string) =>
     setFilterBy((prevFilterBy) => ({
       ...prevFilterBy,
@@ -69,6 +79,11 @@ export const CharacterGallery = () => {
         {characters.map((character) => (
           <CharacterCardWarper key={character.id} character={character} />
         ))}
+        {!characters.length ? (
+          <Text>
+            {`No Results for ${filterBy.status || ""} ${filterBy.name}`}
+          </Text>
+        ) : null}
       </Wrap>
     </Box>
   );

@@ -2,9 +2,10 @@ import { characterStore$ } from "../store/characterStore";
 import { use$ } from "@legendapp/state/react";
 import { CharacterModal } from "./ui/CharacterModal";
 import { useFetchLocation } from "../hooks/useFetchLocation";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useIsFavoriteCharacter } from "../hooks/useIsFavoriteCharacter";
 import { toggleFavoriteCharacter } from "../store/favoritesStore";
+import { useToastMessages } from "../hooks/useToastMessages";
 
 export const CharacterDetails = () => {
   const isSelected = use$(characterStore$.isSelected);
@@ -13,10 +14,17 @@ export const CharacterDetails = () => {
   const { id, name, status, species, gender, episodes, image, originId } =
     selectedCharacter || {};
 
-  const { location, loading } = useFetchLocation({
+  const { warnToast } = useToastMessages();
+  const { location, loading, error } = useFetchLocation({
     locationId: originId || -1,
   });
   const isFavorite = useIsFavoriteCharacter(id || -1);
+
+  useEffect(() => {
+    if (error) {
+      warnToast({ description: "Something went wrong" });
+    }
+  }, [error, warnToast]);
 
   const locationDetails = useMemo(() => {
     if (!location) {
