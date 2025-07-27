@@ -5,7 +5,7 @@ import { FilterStatus } from "./FilterStatus";
 import { PagingButtons } from "./ui/PagingButtons";
 import { CharacterCardWarper } from "./CharacterCardWarper";
 import { CharacterCardSkeleton } from "./ui/CharacterCard";
-import { SearchInput } from "./ui/SearchInput";
+import { SearchInputDebounce } from "./ui/SearchInputDebounce";
 
 export const CharacterGallery = () => {
   const { loading, characters, pages, filterBy, setFilterBy } =
@@ -20,7 +20,7 @@ export const CharacterGallery = () => {
 
   return (
     <Box>
-      <SearchInput
+      <SearchInputDebounce
         value={filterBy.name || ""}
         placeholder="Type a name..."
         onChange={handleInputChange}
