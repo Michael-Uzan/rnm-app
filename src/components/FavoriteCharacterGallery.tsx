@@ -11,6 +11,7 @@ export const FavoriteCharacterGallery = () => {
       <For each={favoriteStore$.characters}>
         {(character) => (
           <CharacterCardWarper
+            minimize
             key={character.id.get()}
             character={character.get()}
           />

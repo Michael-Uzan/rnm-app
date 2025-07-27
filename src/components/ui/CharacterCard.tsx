@@ -11,6 +11,7 @@ import {
 import { FavoriteButton } from "./FavoriteButton";
 
 type CharacterCardProps = {
+  minimize: boolean;
   name: string;
   status: string;
   image: string;
@@ -21,6 +22,7 @@ type CharacterCardProps = {
 
 export const CharacterCard = ({
   name,
+  minimize,
   status,
   image,
   isFavorite,
@@ -44,20 +46,28 @@ export const CharacterCard = ({
     >
       <Image
         objectFit="cover"
-        w={{ base: "200px", sm: "150px" }}
-        h={"200px"}
+        w={{
+          base: minimize ? "140px" : "200px",
+          sm: minimize ? "80px" : "150px",
+        }}
+        h={minimize ? "140px" : "200px"}
         src={image}
       />
       <Stack>
-        <CardBody width={"140px"}>
+        <CardBody width={"140px"} padding={minimize ? "8px" : "12px"}>
           <Heading maxWidth={"100px"} size="sm" marginBottom={"10px"}>
             {name}
           </Heading>
-          <Tag colorScheme="teal">{status}</Tag>
+          {!minimize ? <Tag colorScheme="teal">{status}</Tag> : null}
         </CardBody>
 
-        <CardFooter>
-          <FavoriteButton isActive={isFavorite} onClick={onFavoriteClick} />
+        <CardFooter padding={minimize ? "8px" : "12px"}>
+          <FavoriteButton
+            aria-label="favorite-button-card"
+            size={minimize ? "xs" : "md"}
+            isActive={isFavorite}
+            onClick={onFavoriteClick}
+          />
         </CardFooter>
       </Stack>
     </Card>

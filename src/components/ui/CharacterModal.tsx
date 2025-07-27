@@ -106,7 +106,11 @@ export const CharacterModal = ({
         </ModalBody>
 
         <ModalFooter justifyContent={"center"}>
-          <FavoriteButton isActive={isFavorite} onClick={onFavoriteClicked} />
+          <FavoriteButton
+            aria-label="favorite-button-modal"
+            isActive={isFavorite}
+            onClick={onFavoriteClicked}
+          />
         </ModalFooter>
       </ModalContent>
     </Modal>

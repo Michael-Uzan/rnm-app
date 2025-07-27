@@ -6,10 +6,12 @@ import { toggleFavoriteCharacter } from "../store/favoritesStore";
 import { CharacterCard } from "./ui/CharacterCard";
 
 type CharacterCardWarperProps = {
+  minimize?: boolean;
   character: ICharacter;
 };
 
 export const CharacterCardWarper = ({
+  minimize = false,
   character,
 }: CharacterCardWarperProps) => {
   const { id, image, name, status } = character;
@@ -18,6 +20,7 @@ export const CharacterCardWarper = ({
 
   return (
     <CharacterCard
+      minimize={minimize}
       image={image}
       name={name}
       status={status}
