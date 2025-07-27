@@ -1,4 +1,5 @@
 import {
+  Heading,
   HStack,
   Image,
   Modal,
@@ -13,12 +14,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { FavoriteButton } from "./FavoriteButton";
+import { LocationDetail } from "./LocationDetail";
 
 type CharacterModalProps = {
   title?: string;
   image?: string;
   labels?: string[];
   description?: string;
+  detailsTitle: string;
+  details?: Record<string, string>;
   isOpen: boolean;
   onClose: () => void;
 };
@@ -28,14 +32,23 @@ export const CharacterModal = ({
   image,
   description,
   labels,
+  detailsTitle,
+  details,
   isOpen,
   onClose,
 }: CharacterModalProps) => {
   return (
-    <Modal isOpen={isOpen} closeOnOverlayClick={true} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      closeOnOverlayClick={true}
+      onClose={onClose}
+      size={"xl"}
+    >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{title}</ModalHeader>
+        <ModalHeader fontSize={"22px"} textAlign={"center"}>
+          {title}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <VStack justifyContent={"center"}>
@@ -45,7 +58,6 @@ export const CharacterModal = ({
               h={"200px"}
               src={image}
             />
-            <Text>{description}</Text>
             <HStack>
               {labels?.map((label) => (
                 <Tag key={label} colorScheme="teal">
@@ -53,6 +65,19 @@ export const CharacterModal = ({
                 </Tag>
               ))}
             </HStack>
+            <Text marginBottom={"10px"}>{description}</Text>
+            {details ? (
+              <VStack width={"100%"}>
+                <Heading fontSize={"18px"}>{detailsTitle}</Heading>
+                {Object.entries(details).map(([key, value]) => (
+                  <LocationDetail
+                    key={`${key}-${value}`}
+                    label={key}
+                    value={value}
+                  />
+                ))}
+              </VStack>
+            ) : null}
           </VStack>
         </ModalBody>
 
