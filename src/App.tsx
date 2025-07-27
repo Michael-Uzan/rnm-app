@@ -4,6 +4,7 @@ import { AppHeader } from "./components/AppHeader";
 import { HalfSide, MainContainer } from "./components/layout/MainContainer";
 import { CharacterGallery } from "./components/CharacterGallery";
 import { CharacterDetails } from "./components/CharacterDetails";
+import HeadingSection from "./components/ui/HeadingSection";
 
 function App() {
   return (
@@ -12,15 +13,11 @@ function App() {
       <AppHeader />
       <MainContainer>
         <HalfSide>
-          <Heading size={"md"} marginBottom={"10px"}>
-            Characters
-          </Heading>
+          <HeadingSection title="Characters" />
           <CharacterGallery />
         </HalfSide>
         <HalfSide>
-          <Heading size={"md"} marginBottom={"10px"}>
-            Favorites
-          </Heading>
+          <HeadingSection title="Favorites" />
         </HalfSide>
       </MainContainer>
       <AppFooter />

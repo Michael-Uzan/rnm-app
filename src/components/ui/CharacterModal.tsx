@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { FavoriteButton } from "./FavoriteButton";
 import { LocationDetail } from "./LocationDetail";
+import HeadingSection from "./HeadingSection";
 
 type CharacterModalProps = {
   isOpen: boolean;
@@ -72,7 +73,7 @@ export const CharacterModal = ({
             <Text marginBottom={"10px"}>{description}</Text>
             {details ? (
               <VStack width={"100%"}>
-                <Heading fontSize={"18px"}>{detailsTitle}</Heading>
+                <HeadingSection title={detailsTitle} />
                 {Object.entries(details).map(([key, value]) => (
                   <LocationDetail
                     key={`${key}-${value}`}
