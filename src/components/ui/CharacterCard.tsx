@@ -3,10 +3,13 @@ import {
   CardBody,
   CardFooter,
   Heading,
+  HStack,
   Image,
   Skeleton,
   Stack,
   Tag,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { FavoriteButton } from "./FavoriteButton";
 
@@ -54,11 +57,16 @@ export const CharacterCard = ({
         src={image}
       />
       <Stack>
-        <CardBody width={"140px"} padding={minimize ? "8px" : "12px"}>
+        <CardBody width={"150px"} padding={minimize ? "8px" : "12px"}>
           <Heading maxWidth={"100px"} size="sm" marginBottom={"10px"}>
             {name}
           </Heading>
-          {!minimize ? <Tag colorScheme="teal">{status}</Tag> : null}
+          {!minimize ? (
+            <HStack width="100%">
+              <Text fontSize={"14px"}>Status: </Text>
+              <Tag colorScheme="teal">{status}</Tag>
+            </HStack>
+          ) : null}
         </CardBody>
 
         <CardFooter padding={minimize ? "8px" : "12px"}>
