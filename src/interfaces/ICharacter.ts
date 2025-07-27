@@ -3,7 +3,7 @@ export type ICharacter = {
   name: string;
   episodes: number;
   image: string;
-  originUrl: string;
+  originId: number;
   species: string;
   gender: string;
   status: CharacterStatus;
