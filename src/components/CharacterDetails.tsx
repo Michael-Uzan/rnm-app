@@ -43,7 +43,13 @@ export const CharacterDetails = () => {
       isFavorite={isFavorite}
       title={name}
       image={image}
-      labels={isSelected ? ([status, species, gender] as string[]) : undefined}
+      labels={
+        isSelected
+          ? ([status, species, gender].filter(
+              (value) => value !== "unknown"
+            ) as string[])
+          : undefined
+      }
       detailsTitle="Origin"
       details={locationDetails}
       description={`${name}, appears in ${episodes} episodes.`}
