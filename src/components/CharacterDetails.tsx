@@ -13,7 +13,9 @@ export const CharacterDetails = () => {
   const { id, name, status, species, gender, episodes, image, originId } =
     selectedCharacter || {};
 
-  const { location } = useFetchLocation({ locationId: originId || -1 });
+  const { location, loading } = useFetchLocation({
+    locationId: originId || -1,
+  });
   const isFavorite = useIsFavoriteCharacter(id || -1);
 
   const locationDetails = useMemo(() => {
@@ -28,6 +30,7 @@ export const CharacterDetails = () => {
 
   return (
     <CharacterModal
+      loading={loading}
       isOpen={isSelected}
       isFavorite={isFavorite}
       title={name}

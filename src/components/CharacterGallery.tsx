@@ -1,16 +1,11 @@
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Wrap,
-} from "@chakra-ui/react";
+import { Box, Wrap } from "@chakra-ui/react";
 import { useFetchCharacters } from "../hooks/useFetchCharacters";
 import { CharacterStatus } from "../interfaces/ICharacter";
 import { FilterStatus } from "./FilterStatus";
 import { PagingButtons } from "./ui/PagingButtons";
-import { SearchIcon } from "@chakra-ui/icons";
 import { CharacterCardWarper } from "./CharacterCardWarper";
+import { CharacterCardSkeleton } from "./ui/CharacterCard";
+import { SearchInput } from "./ui/SearchInput";
 
 export const CharacterGallery = () => {
   const { loading, characters, pages, filterBy, setFilterBy } =
@@ -25,18 +20,12 @@ export const CharacterGallery = () => {
 
   return (
     <Box>
-      <InputGroup>
-        <Input
-          type="search"
-          placeholder="Type a name..."
-          marginBottom={"10px"}
-          value={filterBy.name}
-          onChange={({ target }) => handleInputChange(target.value)}
-        />
-        <InputRightElement>
-          <SearchIcon color="teal.500" />
-        </InputRightElement>
-      </InputGroup>
+      <SearchInput
+        value={filterBy.name || ""}
+        placeholder="Type a name..."
+        onChange={handleInputChange}
+      />
+
       <FilterStatus
         name="status"
         options={[
@@ -72,6 +61,11 @@ export const CharacterGallery = () => {
         }
       />
       <Wrap spacing="10px">
+        {loading
+          ? new Array(8)
+              .fill(null)
+              .map((_, index) => <CharacterCardSkeleton key={index} />)
+          : null}
         {characters.map((character) => (
           <CharacterCardWarper key={character.id} character={character} />
         ))}

@@ -19,6 +19,7 @@ export const useFetchLocation = ({ locationId }: useFetchLocationProps) => {
       // if not origin location fallback to default location.
       if (locationId === -1) {
         setLocation(DEFAULT_LOCATION);
+        setLoading(false);
         return;
       }
       try {
