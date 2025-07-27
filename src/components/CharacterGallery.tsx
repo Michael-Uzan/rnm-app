@@ -1,4 +1,3 @@
-import { CharacterCard } from "./ui/CharacterCard";
 import {
   Box,
   Input,
@@ -11,12 +10,11 @@ import { CharacterStatus } from "../interfaces/ICharacter";
 import { FilterStatus } from "./FilterStatus";
 import { PagingButtons } from "./ui/PagingButtons";
 import { SearchIcon } from "@chakra-ui/icons";
-import { characterStore$ } from "../store/characterStore";
+import { CharacterCardWarper } from "./CharacterCardWarper";
 
 export const CharacterGallery = () => {
   const { loading, characters, pages, filterBy, setFilterBy } =
     useFetchCharacters();
-
   const handleInputChange = (name: string) =>
     setFilterBy((prevFilterBy) => ({
       ...prevFilterBy,
@@ -74,21 +72,9 @@ export const CharacterGallery = () => {
         }
       />
       <Wrap spacing="10px">
-        {characters.map((character) => {
-          const { id, image, name, status } = character;
-
-          return (
-            <CharacterCard
-              key={id}
-              image={image}
-              name={name}
-              status={status}
-              onClick={() => {
-                characterStore$.selected.set(character);
-              }}
-            />
-          );
-        })}
+        {characters.map((character) => (
+          <CharacterCardWarper key={character.id} character={character} />
+        ))}
       </Wrap>
     </Box>
   );

@@ -17,13 +17,15 @@ import { FavoriteButton } from "./FavoriteButton";
 import { LocationDetail } from "./LocationDetail";
 
 type CharacterModalProps = {
+  isOpen: boolean;
+  isFavorite: boolean;
   title?: string;
   image?: string;
   labels?: string[];
   description?: string;
   detailsTitle: string;
   details?: Record<string, string>;
-  isOpen: boolean;
+  onFavoriteClicked: () => void;
   onClose: () => void;
 };
 
@@ -35,6 +37,8 @@ export const CharacterModal = ({
   detailsTitle,
   details,
   isOpen,
+  isFavorite,
+  onFavoriteClicked,
   onClose,
 }: CharacterModalProps) => {
   return (
@@ -82,7 +86,7 @@ export const CharacterModal = ({
         </ModalBody>
 
         <ModalFooter justifyContent={"center"}>
-          <FavoriteButton isActive onClick={() => console.log("like")} />
+          <FavoriteButton isActive={isFavorite} onClick={onFavoriteClicked} />
         </ModalFooter>
       </ModalContent>
     </Modal>

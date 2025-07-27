@@ -13,14 +13,18 @@ type CharacterCardProps = {
   name: string;
   status: string;
   image: string;
+  isFavorite: boolean;
   onClick: () => void;
+  onFavoriteClick: () => void;
 };
 
 export const CharacterCard = ({
   name,
   status,
   image,
+  isFavorite,
   onClick,
+  onFavoriteClick,
 }: CharacterCardProps) => {
   return (
     <Card
@@ -52,7 +56,7 @@ export const CharacterCard = ({
         </CardBody>
 
         <CardFooter>
-          <FavoriteButton isActive onClick={() => console.log("like")} />
+          <FavoriteButton isActive={isFavorite} onClick={onFavoriteClick} />
         </CardFooter>
       </Stack>
     </Card>
