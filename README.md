@@ -1,8 +1,8 @@
-# Rick and Morty Characters
+# Rick and Morty Characters ([App](https://rnm-app.vercel.app/))
 
 Search, browse, and favorite your favorite Rick and Morty characters. <br/>
-Built with React, TypeScript, Chakra UI, Legend-State App, Axios, <br/>
-Project using Pnpm and Vite <br/>
+Built with React, TypeScript, Chakra UI, Legend-State App, Axios. <br/>
+Project using Pnpm and Vite, Deploy to Vercel. <br/>
 Tested with Jest.
 
 Link to the app: [App](https://rnm-app.vercel.app/) <br /> <br/>
@@ -86,5 +86,37 @@ favoriteStore$ = {
 
 function toggleFavoriteCharacter(character)
 ```
+## Data Flow Diagram
+
+<img width="3083" height="1793" alt="dffd (5)" src="https://github.com/user-attachments/assets/666bebd9-d5e2-467c-8a3a-94d3259f853c" />
+
+## Components Diagram
+
+<img width="1920" height="1080" alt="dffd (4)" src="https://github.com/user-attachments/assets/4019c176-50ad-4f82-b4b6-b79dedfb9a69" />
 
 
+## APP Data Entities
+
+### The Character Entity
+
+```js
+type ICharacter = {
+  id: number;
+  name: string;
+  episodes: number;
+  image: string;
+  originId: number;
+  species: string;
+  gender: string;
+  status: enum ["Alive", "Dead", "unknown"];
+};
+```
+### The Location Entity
+```js
+type ILocation = {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+};
+```
