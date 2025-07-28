@@ -6,6 +6,7 @@ import { useEffect, useMemo } from "react";
 import { useIsFavoriteCharacter } from "../hooks/useIsFavoriteCharacter";
 import { toggleFavoriteCharacter } from "../store/favoritesStore";
 import { useToastMessages } from "../hooks/useToastMessages";
+import { ERROR_MESSAGE } from "../config/uiConfig";
 
 export const CharacterDetails = () => {
   const isSelected = use$(characterStore$.isSelected);
@@ -22,7 +23,7 @@ export const CharacterDetails = () => {
 
   useEffect(() => {
     if (error) {
-      warnToast({ description: "Something went wrong" });
+      warnToast({ description: ERROR_MESSAGE });
     }
   }, [error, warnToast]);
 

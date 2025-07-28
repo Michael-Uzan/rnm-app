@@ -30,7 +30,7 @@ export const useFetchCharacters = () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         // workaround because the api return error when no search results....
-        if (e.response.data.error === "There is nothing here") {
+        if (e?.response?.data?.error === "There is nothing here") {
           setCharacters([]);
           return;
         }

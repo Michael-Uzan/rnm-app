@@ -1,5 +1,6 @@
 import { GithubIcon } from "../assets/GithubIcon";
 import { LogoIcon } from "../assets/LogoIcon";
+import { API_LINK, GITHUB_LINK } from "../config/uiConfig";
 import { FooterWarper } from "./layout/FooterWarper";
 import { Button, Text, VStack } from "@chakra-ui/react";
 
@@ -12,7 +13,7 @@ export const AppFooter = () => {
           size={"xs"}
           as="a"
           variant={"link"}
-          href="https://github.com/Michael-Uzan/rnm-app"
+          href={GITHUB_LINK}
           target="_blank"
           leftIcon={<GithubIcon />}
           alignItems={"center"}
@@ -23,7 +24,7 @@ export const AppFooter = () => {
           as="a"
           size={"xs"}
           variant={"link"}
-          href="https://rickandmortyapi.com/documentation/"
+          href={API_LINK}
           target="_blank"
           leftIcon={<LogoIcon height={"32px"} width={"32px"} />}
           alignItems={"center"}

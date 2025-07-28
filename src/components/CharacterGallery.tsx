@@ -1,13 +1,13 @@
-import { Box, Text, Wrap } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useFetchCharacters } from "../hooks/useFetchCharacters";
 import { CharacterStatus } from "../interfaces/ICharacter";
 import { FilterStatus } from "./FilterStatus";
 import { PagingButtons } from "./ui/PagingButtons";
-import { CharacterCardWarper } from "./CharacterCardWarper";
-import { CharacterCardSkeleton } from "./ui/CharacterCard";
 import { SearchInputDebounce } from "./ui/SearchInputDebounce";
 import { useToastMessages } from "../hooks/useToastMessages";
 import { useEffect } from "react";
+import CharacterList from "./CharacterList";
+import { ERROR_MESSAGE } from "../config/uiConfig";
 
 export const CharacterGallery = () => {
   const { loading, error, characters, pages, filterBy, setFilterBy } =
@@ -16,7 +16,7 @@ export const CharacterGallery = () => {
 
   useEffect(() => {
     if (error) {
-      warnToast({ description: "Something went wrong" });
+      warnToast({ description: ERROR_MESSAGE });
     }
   }, [error, warnToast]);
 
@@ -35,7 +35,6 @@ export const CharacterGallery = () => {
         placeholder="Type a name..."
         onChange={handleInputChange}
       />
-
       <FilterStatus
         name="status"
         options={[
@@ -70,21 +69,13 @@ export const CharacterGallery = () => {
           }))
         }
       />
-      <Wrap spacing="10px">
-        {loading
-          ? new Array(8)
-              .fill(null)
-              .map((_, index) => <CharacterCardSkeleton key={index} />)
-          : null}
-        {characters.map((character) => (
-          <CharacterCardWarper key={character.id} character={character} />
-        ))}
-        {!characters.length ? (
-          <Text>
-            {`No Results for ${filterBy.status || ""} ${filterBy.name}`}
-          </Text>
-        ) : null}
-      </Wrap>
+      <CharacterList
+        noResultText={`No Results for ${filterBy.status || ""} ${
+          filterBy.name
+        }`}
+        characters={characters}
+        loading={loading}
+      />
     </Box>
   );
 };

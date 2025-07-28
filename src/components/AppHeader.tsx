@@ -22,7 +22,7 @@ export const AppHeader = () => {
         aria-label="color-mode-button"
         icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         onClick={toggleColorMode}
-      ></IconButton>
+      />
     </HeaderWarper>
   );
 };
