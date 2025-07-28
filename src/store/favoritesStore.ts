@@ -5,7 +5,7 @@ export const favoriteStore$ = observable({
   characters: [] as ICharacter[],
 });
 
-function isFavoriteCharacter(characterId: number) {
+export function isFavoriteCharacter(characterId: number) {
   const favoritesCharacters = favoriteStore$.characters.get();
 
   return favoritesCharacters.some((favorite) => favorite.id === characterId);
